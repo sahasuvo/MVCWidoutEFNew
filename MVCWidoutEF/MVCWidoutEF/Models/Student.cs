@@ -14,5 +14,7 @@ namespace MVCWidoutEF.Models
         public string Name { get; set; }
         [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter City Name")]
         public string CityName { get; set; }
+        [Required (AllowEmptyStrings =false,ErrorMessage ="Please Enter Your Address")]
+        public string Address { get; set; }
     }
 }
