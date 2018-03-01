@@ -5,9 +5,11 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
+using System.Reflection;
 
 namespace MVCWidoutEF.Models
 {
+
     public class DBHandle
     {
         private SqlConnection conn;
@@ -40,7 +42,7 @@ namespace MVCWidoutEF.Models
         }
 
         dynamic datareturn { get; set; }
-        private dynamic SqlGetData(String StrStoredProcedure,object[] objparam, int executiontype)
+        private dynamic SqlGetData(String StrStoredProcedure,object[] objparam, int? executiontype)
         {
             datareturn = null;
             SqlConn();
@@ -68,6 +70,13 @@ namespace MVCWidoutEF.Models
                     break;
                 case 2: //Execute Query
                     break;
+                default:
+                    SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                    DataSet ds = new DataSet();
+                    adp.Fill(ds);
+                    datareturn = ds;
+                    break;
+
             }
 
             conn.Close();
@@ -106,5 +115,53 @@ namespace MVCWidoutEF.Models
             int i = SqlNonQuery("DeleteStudent", data);
             return i == 0 ? false : true;
         }
+
+        private List<T>ConvertDataTable<T>(DataTable dt)
+        {
+            ////http://www.c-sharpcorner.com/UploadFile/ee01e6/different-way-to-convert-datatable-to-list/
+            //https://stackoverflow.com/questions/7794818/how-can-i-convert-a-datatable-into-a-dynamic-object
+
+            List<T> dtlist = new List<T>();
+            
+            foreach (DataRow dr in dt.Rows)
+            {
+                Type tempcls = typeof(T);
+                T objT = Activator.CreateInstance<T>();
+
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    foreach (PropertyInfo prop in tempcls.GetProperties())
+                    {
+                        if (prop.Name == dc.ColumnName)
+                        {
+                            prop.SetValue(objT, dr[dc.ColumnName], null);
+                        }
+                        else
+                            continue;
+                    }
+                }
+                dtlist.Add(objT);
+            }
+
+            return dtlist;
+            
+
+            //List<T>
+
+            //
+            //foreach(DataRow dr in dt.Rows)
+            //{
+            //    T item = 
+            //}
+        }
+        //public dynamic GetStudent()
+        //{
+        //    DataTable dtStudent = SqlGetData("GetStudentDetails", null, null);
+        //    //System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
+        //    //SqlConn();
+        //    //List<StudentModel> studentlist = new List<StudentModel>();
+        //    //SqlCommand  cmd = new SqlCommand("")
+        //}
+
     }
 }
