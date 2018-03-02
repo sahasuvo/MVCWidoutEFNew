@@ -154,14 +154,15 @@ namespace MVCWidoutEF.Models
             //    T item = 
             //}
         }
-        //public dynamic GetStudent()
-        //{
-        //    DataTable dtStudent = SqlGetData("GetStudentDetails", null, null);
-        //    //System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
-        //    //SqlConn();
-        //    //List<StudentModel> studentlist = new List<StudentModel>();
-        //    //SqlCommand  cmd = new SqlCommand("")
-        //}
+        public dynamic GetStudent()
+        {
+            DataTable dtStudent = SqlGetData("GetStudentDetails", null, null);
+            //System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
+            //SqlConn();
+            //List<StudentModel> studentlist = new List<StudentModel>();
+            //SqlCommand  cmd = new SqlCommand("")
+            return dtStudent;
+        }
 
     }
 }
