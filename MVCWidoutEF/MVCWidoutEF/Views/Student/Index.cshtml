@@ -1,0 +1,25 @@
+﻿@model MVCWidoutEF.Models.StudentModel
+<p>
+    @Html.ActionLink("Add Student", "Create");
+</p>
+<script>
+
+    var data = @Html.Raw(Json.Encode(Model.JsonData));
+</script>
+@*<table>
+    <tr>
+        <th>
+            @Html.DisplayName("Name")
+        </th>
+        <th>
+            @Html.DisplayName("City")
+        </th>
+        <th>
+            @Html.DisplayName("Address")
+        </th>
+    </tr>
+    @foreach(var item in Model)
+    {
+
+    }
+</table>*@

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCWidoutEF.Models;
 
 namespace MVCWidoutEF.Controllers
 {
@@ -11,7 +12,13 @@ namespace MVCWidoutEF.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            return View();
+            DBHandle objdbhndle = new DBHandle();
+            ModelState.Clear();
+            var model = new StudentModel()
+            {
+                JsonData = objdbhndle.GetStudent()
+            };
+            return View(model);
         }
 
         // GET: Student/Details/5

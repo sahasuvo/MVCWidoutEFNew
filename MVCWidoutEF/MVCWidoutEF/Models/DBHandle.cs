@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Reflection;
+using System.Web.Script.Serialization;
 
 namespace MVCWidoutEF.Models
 {
@@ -157,11 +158,13 @@ namespace MVCWidoutEF.Models
         public dynamic GetStudent()
         {
             DataTable dtStudent = SqlGetData("GetStudentDetails", null, null);
+            var jsonSerialize = new JavaScriptSerializer();
+            var jsonsrlz = jsonSerialize.Serialize(ConvertDataTable<dynamic>(dtStudent));
             //System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
             //SqlConn();
             //List<StudentModel> studentlist = new List<StudentModel>();
             //SqlCommand  cmd = new SqlCommand("")
-            return dtStudent;
+            return jsonsrlz;
         }
 
     }
