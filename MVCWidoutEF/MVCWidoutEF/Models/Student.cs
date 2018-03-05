@@ -17,6 +17,6 @@ namespace MVCWidoutEF.Models
         [Required (AllowEmptyStrings =false,ErrorMessage ="Please Enter Your Address")]
         public string Address { get; set; }
 
-        public IEnumerable<String> JsonData { get; set; }
+        public String JsonData { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System.Web.Script.Serialization;
+using Newtonsoft;
 
 namespace MVCWidoutEF.Models
 {
@@ -50,10 +51,11 @@ namespace MVCWidoutEF.Models
             SqlCommand cmd = new SqlCommand(StrStoredProcedure, conn);
             
             cmd.CommandType = CommandType.StoredProcedure;
+            conn.Open();
             SqlCommandBuilder.DeriveParameters(cmd);
 
 
-            if (objparam.Length > 0)
+            if (objparam !=null && objparam.Length > 0)
             {
                 for (int i = 0; i <= cmd.Parameters.Count; i++)
                 {
@@ -62,7 +64,7 @@ namespace MVCWidoutEF.Models
                 }
             }
 
-            conn.Open();
+            
             switch (executiontype)
             {
                 case 1: // Execute scalar
@@ -158,9 +160,11 @@ namespace MVCWidoutEF.Models
         }
         public dynamic GetStudent()
         {
-            DataTable dtStudent = SqlGetData("GetStudentDetails", null, null);
+            DataSet dtStudent = SqlGetData("GetStudentDetails", null, null);
             var jsonSerialize = new JavaScriptSerializer();
-            var jsonsrlz = jsonSerialize.Serialize(ConvertDataTable<dynamic>(dtStudent));
+
+            var jsonsrlz = Newtonsoft.Json.JsonConvert.SerializeObject(dtStudent.Tables[0]);
+            //var jsonsrlz = jsonSerialize.Serialize(ConvertDataTable<dynamic>(dtStudent.Tables[0]));
             //System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
             //SqlConn();
             //List<StudentModel> studentlist = new List<StudentModel>();
