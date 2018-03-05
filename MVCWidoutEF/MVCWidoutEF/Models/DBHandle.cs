@@ -48,10 +48,11 @@ namespace MVCWidoutEF.Models
             datareturn = null;
             SqlConn();
             SqlCommand cmd = new SqlCommand(StrStoredProcedure, conn);
-            SqlCommandBuilder.DeriveParameters(cmd);
-            cmd.CommandType = CommandType.StoredProcedure;
             
-          
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommandBuilder.DeriveParameters(cmd);
+
+
             if (objparam.Length > 0)
             {
                 for (int i = 0; i <= cmd.Parameters.Count; i++)
