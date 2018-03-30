@@ -18,6 +18,8 @@ namespace MVCWidoutEF.Controllers
             {
                 JsonData = objdbhndle.GetStudent()
             };
+            //((dynamic)Newtonsoft.Json.JsonConvert.DeserializeObject(model));
+            //@model MVCWidoutEF.Models.StudentModel
             return View(model);
         }
 
