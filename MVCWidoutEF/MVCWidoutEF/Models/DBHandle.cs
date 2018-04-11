@@ -161,14 +161,14 @@ namespace MVCWidoutEF.Models
         public dynamic GetStudent()
         {
             DataSet dtStudent = SqlGetData("GetStudentDetails", null, null);
-            var jsonSerialize = new JavaScriptSerializer();
+            //var jsonSerialize = new JavaScriptSerializer();
 
             var jsonsrlz = Newtonsoft.Json.JsonConvert.SerializeObject(dtStudent.Tables[0]);
             //var jsonsrlz = jsonSerialize.Serialize(ConvertDataTable<dynamic>(dtStudent.Tables[0]));
-            //System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
-            //SqlConn();
-            //List<StudentModel> studentlist = new List<StudentModel>();
-            //SqlCommand  cmd = new SqlCommand("")
+            ////System.Collections.Generic.List<T objlst = ConvertDataTable(dtStudent);
+            ////SqlConn();
+            ////List<StudentModel> studentlist = new List<StudentModel>();
+            ////SqlCommand  cmd = new SqlCommand("")
             return jsonsrlz;
         }
 

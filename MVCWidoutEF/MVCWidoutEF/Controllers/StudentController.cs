@@ -12,15 +12,30 @@ namespace MVCWidoutEF.Controllers
         // GET: Student
         public ActionResult Index()
         {
+            //DBHandle objdbhndle = new DBHandle();
+            //ModelState.Clear();
+            //var model = new StudentModel()
+            //{
+            //    JsonData = objdbhndle.GetStudent()
+            //};
+            //((dynamic)Newtonsoft.Json.JsonConvert.DeserializeObject(model));
+            //@model MVCWidoutEF.Models.StudentModel
+            return View();
+        }
+
+        public JsonResult GetData()
+        {
             DBHandle objdbhndle = new DBHandle();
             ModelState.Clear();
             var model = new StudentModel()
             {
                 JsonData = objdbhndle.GetStudent()
             };
+
+            return Json(model);
             //((dynamic)Newtonsoft.Json.JsonConvert.DeserializeObject(model));
             //@model MVCWidoutEF.Models.StudentModel
-            return View(model);
+            //return View(model);
         }
 
         // GET: Student/Details/5
