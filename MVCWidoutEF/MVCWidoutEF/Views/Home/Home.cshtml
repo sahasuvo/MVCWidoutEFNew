@@ -1,0 +1,15 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Index</h2>
+<div>
+    @{
+        var greeting = "Welcome to Home Page";
+        var date = DateTime.Now.Date;
+        var grretMsg = greeting + " Today's Date is: " + date;
+    }
+    <p>Greetings Message : @grretMsg</p>
+
+</div>
